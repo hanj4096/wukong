@@ -1,4 +1,4 @@
-# wukong: A LKM rootkit for Linux kernel 2.6.x, 3.x and 4.x
+# Wukong: A LKM rootkit for Linux kernel 2.6.x, 3.x and 4.x
 <h1>
 	Note:
 </h1>
@@ -13,7 +13,8 @@
 <strong>1. Hide Linux Process.</strong><br />
 <strong>2. Hide TCP connection.</strong><br />
 <strong>3. Hide File/Directory.</strong><br />
-<strong>4. Redirect TCP connection to backdoor server by using the specific confidential password.</strong><br />
+<strong>4. Hide wukong.ko.</strong><br />
+<strong>5. Redirect TCP connection to backdoor server by using the specific confidential password.</strong><br />
 <br />
 <h1>
 	Usage
@@ -59,10 +60,11 @@ PS: The connection will be connected with tcp 80.<br />
 <h2>
 	3. Result:
 </h2>
-<strong>a. Hide bindshell file.</strong><br />
-<strong>b. Hide tcp 8000 connection.</strong><br />
-<strong>c. Hide bindshell process</strong><br />
-<strong>d. If "http" is the first four bytes to TCP 80, connection will be established with bindshell.</strong><br />
+<strong>a. Bindshell file is hidden.</strong><br />
+<strong>b. Tcp 8000 connection is hidden.</strong><br />
+<strong>c. Bindshell process is hidden</strong><br />
+<strong>c. wukong.ko is hidden</strong><br />
+<strong>e. If "http" is the first four bytes to TCP 80, connection will be established with bindshell.</strong><br />
 <br />
 <br />
 <h1>
