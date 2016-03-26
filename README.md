@@ -1,13 +1,7 @@
-# wukong
-<br />
-<br />
-<br />
+# wukong: A LKM rootkit for Linux kernel 2.6.x, 3.x and 4.x
 <h1>
 	Note:
 </h1>
-<p>
-	<strong>Wukong is s LKM rootkit for Linux kernel 2.6.x, 3.x and 4.x.</strong>
-</p>
 <p>
 	<strong>This kernel rootkit is just for educational purpose and it shouldn't be used for any illegal activities, use this at your own risk.</strong>
 </p>
