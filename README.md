@@ -83,3 +83,10 @@ ubuntu-14.04.3-desktop-i386.iso<br />
 ubuntu-14.04.3-desktop-amd64.iso<br />
 &nbsp;&nbsp;&nbsp; Linux&nbsp; 3.19.0-25-generic #26~14.04.1-Ubuntu SMP Fri Jul 24 21:16:20 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux<br />
 <br />
+<br />
+<h1>
+	ToDo:
+</h1>
+1. Do performance tuning, make it can work on Linux server with large traffic.<br />
+2. Adding more feature.<br />
+<br />
