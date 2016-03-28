@@ -39,18 +39,18 @@ struct ksym
 LIST_HEAD(hooked_syms);
 
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(2, 6, 20))
-	#ifdef __ASSEMBLY__
-	#define _AC(X,Y)	X
-	#define _AT(T,X)	X
-	#else
-	#define __AC(X,Y)	(X##Y)
-	#define _AC(X,Y)	__AC(X,Y)
-	#define _AT(T,X)	((T)(X))
-	#endif
-	#define _BITUL(x)	(_AC(1,UL) << (x))
-	#define _BITULL(x)	(_AC(1,ULL) << (x))
-	#define X86_CR0_WP_BIT          16 /* Write Protect */
-	#define X86_CR0_WP              _BITUL(X86_CR0_WP_BIT)
+    #ifdef __ASSEMBLY__
+    #define _AC(X,Y)    X
+    #define _AT(T,X)    X
+    #else
+    #define __AC(X,Y)   (X##Y)
+    #define _AC(X,Y)    __AC(X,Y)
+    #define _AT(T,X)    ((T)(X))
+    #endif
+    #define _BITUL(x)   (_AC(1,UL) << (x))
+    #define _BITULL(x)  (_AC(1,ULL) << (x))
+    #define X86_CR0_WP_BIT          16 /* Write Protect */
+    #define X86_CR0_WP              _BITUL(X86_CR0_WP_BIT)
 #endif
 
 inline unsigned long disable_wp(void)
@@ -119,7 +119,7 @@ void hijack_pause(void *target)
             memcpy(target, sa->o_code, HIJACK_SIZE);
             restore_wp(o_cr0);
         }
-	}
+    }
 }
 
 void hijack_resume ( void *target )
@@ -134,7 +134,7 @@ void hijack_resume ( void *target )
             memcpy(target, sa->n_code, HIJACK_SIZE);
             restore_wp(o_cr0);
         }
-	}
+    }
 }
 
 void hijack_stop(void *target)
@@ -153,7 +153,7 @@ void hijack_stop(void *target)
             kfree(sa);
             break;
         }
-	}
+    }
 }
 
 char *strnstr(const char *haystack, const char *needle, size_t n)

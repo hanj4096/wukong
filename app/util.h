@@ -14,41 +14,41 @@
 /*
 static char * zalloc(size_t size) 
 {
-	char *ptr = NULL;
-	
-	if(size > 0) {
-		ptr = malloc(size);
-		if (ptr != NULL)
-			memset(ptr, 0, size);
-	}
-	
-	return ptr;
+    char *ptr = NULL;
+    
+    if(size > 0) {
+        ptr = malloc(size);
+        if (ptr != NULL)
+            memset(ptr, 0, size);
+    }
+    
+    return ptr;
 }
 */
 
 static inline void daemonize()
 {
-	pid_t worker_pid;
-	
-	worker_pid = fork();
-	if(worker_pid != 0) 
-		exit(0);
+    pid_t worker_pid;
+    
+    worker_pid = fork();
+    if(worker_pid != 0) 
+        exit(0);
 }
 
 static int write_pid_to_file(const char *file_path)
 {
-	FILE *fp;
-	
-	fp = fopen(file_path, "w");
-	if(fp != NULL) {
-		fprintf (fp, "%d\n", (int)getpid());	
-		fclose(fp);
-	}
-	else {
-		return -1;
-	}
-	
-	return 0;
+    FILE *fp;
+    
+    fp = fopen(file_path, "w");
+    if(fp != NULL) {
+        fprintf (fp, "%d\n", (int)getpid());    
+        fclose(fp);
+    }
+    else {
+        return -1;
+    }
+    
+    return 0;
 }
 
 #endif
