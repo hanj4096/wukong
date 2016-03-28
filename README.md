@@ -1,75 +1,61 @@
-# Wukong: A LKM rootkit for Linux kernel 2.6.x, 3.x and 4.x
-<h1>
-	Note:
-</h1>
-<p>
-	<strong>This kernel rootkit is just for educational purpose and it shouldn't be used for any illegal activities, use this at your own risk.</strong>
-</p>
+# Wukong: a LKM rootkit for Linux kernel 2.6.x, 3.x and 4.x
+The idea of wukong is from a comercail Linux Backdoor software, designed for a hacking team in early 2015 for legal using. Now for educational perpose, I will release an open source version. <strong>Please call me good man.</strong><br />
 <br />
-<br />
-<h1>
-	Function
-</h1>
-<strong>1. Hide Linux Process.</strong><br />
-<strong>2. Hide TCP connection.</strong><br />
-<strong>3. Hide File/Directory.</strong><br />
-<strong>4. Hide wukong.ko.</strong><br />
-<strong>5. Redirect TCP connection to backdoor server by using the specific confidential password.</strong><br />
-<br />
-<h1>
-	Usage
-</h1>
 <h2>
-	1. Environment:
+	<span style="color:#E53333;">Note:</span>
 </h2>
+<span style="color:#E53333;"><strong>This kernel rootkit is just for educational purpose and it shouldn't be used for any illegal activities, use this at your own risk.</strong></span><br />
+<br />
+<br />
+<br />
+<h2>
+	Function
+</h2>
+1. Hide Linux Process.<br />
+2. Hide TCP connection.<br />
+3. Hide File/Directory.<br />
+4. Hide wukong.ko.<br />
+5. Redirect TCP connection to backdoor server by using the specific confidential password.<br />
+<br />
+<h2>
+	Usage
+</h2>
+1. Environment:<br />
 ubunt-14.04 (1.1.1.33) --- (1.1.1.1)ubunt-14.04 &nbsp;<br />
 (client)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (server)<br />
 <br />
-<br />
-<h2>
-	2. Test step:
-</h2>
-<h3>
-	a. on server
-</h3>
+2. Test step:<br />
+a. on server<br />
 cd wukong/<br />
 sudo ./install.pl<br />
-<br />
 sudo nc -k -l 80<br />
 <br />
-<h3>
-	b. on client
-</h3>
+b. on client<br />
 nc 1.1.1.1 80<br />
 http<br />
 ifconfig<br />
-<br />
 PS：The connection will be redirected to bindshell<br />
 <br />
 nc 1.1.1.1 80<br />
 111111<br />
-<br />
 PS: a rst will be received.<br />
 <br />
 nc 1.1.1.1 80<br />
 111111<br />
 aaaaaa<br />
-<br />
 PS: The connection will be connected with tcp 80.<br />
 <br />
+3. Result:<br />
+a. Bindshell file is hidden.<br />
+b. Tcp 8000 connection is hidden.<br />
+c. Bindshell process is hidden<br />
+c. wukong.ko is hidden<br />
+e. If "http" is the first four bytes to TCP 80, connection will be established with bindshell.<br />
+<br />
+<br />
 <h2>
-	3. Result:
-</h2>
-<strong>a. Bindshell file is hidden.</strong><br />
-<strong>b. Tcp 8000 connection is hidden.</strong><br />
-<strong>c. Bindshell process is hidden</strong><br />
-<strong>c. wukong.ko is hidden</strong><br />
-<strong>e. If "http" is the first four bytes to TCP 80, connection will be established with bindshell.</strong><br />
-<br />
-<br />
-<h1>
 	Tested OS:
-</h1>
+</h2>
 CentOS-5.5-i386-bin-DVD.iso<br />
 &nbsp;&nbsp;&nbsp; Linux&nbsp; 2.6.18-408.el5 #1 SMP Tue Jan 19 09:13:33 EST 2016 i686 i686 i386 GNU/Linux<br />
 CentOS-5.5-x86_64-bin-DVD<br />
@@ -84,9 +70,8 @@ ubuntu-14.04.3-desktop-amd64.iso<br />
 &nbsp;&nbsp;&nbsp; Linux&nbsp; 3.19.0-25-generic #26~14.04.1-Ubuntu SMP Fri Jul 24 21:16:20 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux<br />
 <br />
 <br />
-<h1>
+<h2>
 	ToDo:
-</h1>
-1. Do performance tuning, make it can work on Linux server with large traffic.<br />
-2. Adding more feature.<br />
-<br />
+</h2>
+&nbsp;&nbsp;&nbsp; Do performance tuning, make it can work on Linux server with large traffic.<br />
+&nbsp;&nbsp;&nbsp; Adding more features.
