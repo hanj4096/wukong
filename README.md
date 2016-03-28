@@ -1,9 +1,9 @@
 # Wukong: A LKM rootkit for Linux kernel 2.6.x, 3.x and 4.x<br />
 <p>
-	&nbsp;&nbsp;&nbsp;&nbsp;The idea of wukong is from a comercail Linux Backdoor software, designed for a hacking team in early 2015 for legal using. Now for educational perpose, I will release an open source version.
+	&nbsp;&nbsp;&nbsp;&nbsp;The idea of wukong is from a comercail Linux Backdoor software, designed for a hacking team in early 2015 for legal using. Now for educational perpose, I will release an open source version. Please call me good man:).
 </p>
 <p>
-	<strong>&nbsp;&nbsp;&nbsp;&nbsp;Please call me good man:). If you want to buy me a bottle of beer, please contact me via hanj4096@gmail.com.</strong> 
+	<strong>&nbsp;&nbsp;&nbsp;&nbsp; If you want to buy me a bottle of beer, please contact me via hanj4096@gmail.com.</strong> 
 </p>
 <br />
 <h2>
