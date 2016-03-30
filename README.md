@@ -2,9 +2,6 @@
 <p>
 	&nbsp;&nbsp;&nbsp;&nbsp;The idea of wukong is from a commercial Linux Backdoor software, designed for a hacking team in early 2015 for legal using. Now for educational perpose, I will release an open source version. <strong>Please call me good man:).</strong> 
 </p>
-<p>
-	<strong>&nbsp;&nbsp;&nbsp;&nbsp; If you want to buy me a bottle of beer, please contact me via hanj4096@gmail.com.</strong> 
-</p>
 <br />
 <h2>
 	<span style="color:#E53333;">Note:</span> 
